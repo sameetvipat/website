@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blogs on My New Hugo Site</title><link>https://example.org/blog/</link><description>Recent content in Blogs on My New Hugo Site</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 15 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://example.org/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Welcome to My Blog</title><link>https://example.org/blog/first-post/</link><pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate><guid>https://example.org/blog/first-post/</guid><description>&lt;h1 id="welcome-to-my-blog">Welcome to My Blog&lt;/h1>
+&lt;p>This is my first blog post on my new personal website. I&amp;rsquo;ve built this using &lt;strong>Hugo&lt;/strong> for the static site generation and &lt;strong>Tailwind CSS&lt;/strong> for styling.&lt;/p>
+&lt;h2 id="features">Features&lt;/h2>
+&lt;p>This blog includes several features:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Dark mode toggle&lt;/strong> - A circular button in the navbar that remembers your preference&lt;/li>
+&lt;li>&lt;strong>Minimal design&lt;/strong> - Clean, monospaced typography using JetBrains Mono&lt;/li>
+&lt;li>&lt;strong>Responsive layout&lt;/strong> - Works well on all device sizes&lt;/li>
+&lt;li>&lt;strong>Markdown support&lt;/strong> - Full Markdown rendering with proper typography&lt;/li>
+&lt;/ul>
+&lt;h2 id="code-example">Code Example&lt;/h2>
+&lt;p>Here&amp;rsquo;s a simple code example:&lt;/p></description></item></channel></rss>
