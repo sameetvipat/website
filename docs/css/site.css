@@ -85,6 +85,24 @@ html, body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grays
 .dark .social-icon { color: #d1d5db; }
 .dark .social-icon:hover { color: #ffffff; }
 .social-icon svg { width: 1.5rem; height: 1.5rem; display: block; }
+/* Ensure image-based icons match svg sizing */
+.social-icon img { width: 1.5rem; height: 1.5rem; }
+
+/* Letterboxd masked icon so it inherits currentColor and animates like others */
+.social-icon .lbxd-icon {
+  width: 2rem;
+  height: 2rem;
+  display: block;
+  background-color: currentColor;
+  -webkit-mask: url('https://a.ltrbxd.com/logos/letterboxd-decal-dots-pos-mono.svg') no-repeat center / contain;
+  mask: url('https://a.ltrbxd.com/logos/letterboxd-decal-dots-pos-mono.svg') no-repeat center / contain;
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .social-icon .lbxd-icon {
+  -webkit-mask: url('https://a.ltrbxd.com/logos/letterboxd-decal-dots-neg-mono.svg') no-repeat center / contain;
+  mask: url('https://a.ltrbxd.com/logos/letterboxd-decal-dots-neg-mono.svg') no-repeat center / contain;
+}
 
 /* Theme transition utility - scope to body subtree to reduce repaint jitter */
 body.theme-transition, body.theme-transition * {

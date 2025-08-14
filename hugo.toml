@@ -1,4 +1,4 @@
-baseURL = 'https://sameetvipat.github.io/website-new/'
+baseURL = 'https://sameetvipat.github.io/website/'
 languageCode = 'en-us'
 title = 'My New Hugo Site'
 theme = 'minimal-blog'
