@@ -1,0 +1,81 @@
+{{ define "main" }}
+<div class="section-tight transition-colors duration-200">
+    <h1 class="blog-heading">blog</h1>
+    
+    <!-- Search + filter controls -->
+    <div class="section-gap flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <input id="blog-search" type="text" placeholder="Search" class="w-full sm:w-64 px-3 py-1.5 rounded-md bg-gray-200 text-gray-800 placeholder-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-300 outline-none" />
+        <div class="flex items-center gap-2 text-sm tabs-animate" id="blog-filter-tabs" role="tablist" aria-label="Search mode">
+            <button type="button" data-mode="title" class="px-3 py-1 rounded-md bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-white transition-colors duration-200" role="tab" aria-selected="true">title</button>
+            <button type="button" data-mode="tags" class="px-3 py-1 rounded-md text-gray-600 dark:text-gray-300 transition-colors duration-200" role="tab" aria-selected="false">tags</button>
+        </div>
+    </div>
+
+    <div class="section-gap" id="blog-posts">
+		{{ range .Pages.ByDate.Reverse }}
+        <a href="{{ .RelPermalink }}" class="post-link rounded-lg block js-post-item" data-title="{{ .Title | lower }}" data-tags="{{ with .Params.tags }}{{ delimit . " " | lower }}{{ end }}">
+            <div class="flex items-baseline gap-6">
+                <time class="post-date w-28" datetime="{{ .Date.Format "2006-01-02" }}">
+                    {{ .Date.Format "2006-01-02" }}
+                </time>
+                <h2 class="post-title flex-1">{{ .Title }}</h2>
+            </div>
+        </a>
+		{{ end }}
+    </div>
+    
+    {{ if not .Pages }}
+    <div class="text-center py-12">
+        <p class="text-gray-500 dark:text-gray-400">No blog posts yet.</p>
+    </div>
+    {{ end }}
+
+    <script>
+    (function() {
+        const searchInput = document.getElementById('blog-search');
+        const tabs = document.getElementById('blog-filter-tabs');
+        const items = Array.from(document.querySelectorAll('.js-post-item'));
+        let mode = 'title';
+
+        function setActiveTab(targetMode) {
+            Array.from(tabs.querySelectorAll('button')).forEach(btn => {
+                const isActive = btn.getAttribute('data-mode') === targetMode;
+                btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                btn.classList.toggle('bg-gray-200', isActive);
+                btn.classList.toggle('dark:bg-gray-700', isActive);
+                btn.classList.toggle('text-gray-900', isActive);
+                btn.classList.toggle('dark:text-white', isActive);
+                btn.classList.toggle('text-gray-600', !isActive);
+                btn.classList.toggle('dark:text-gray-300', !isActive);
+            });
+        }
+
+        function applyFilter() {
+            const query = (searchInput.value || '').trim().toLowerCase();
+            items.forEach(el => {
+                if (!query) { el.classList.remove('hidden'); return; }
+                const title = el.dataset.title || '';
+                const tags = el.dataset.tags || '';
+                let match = false;
+                if (mode === 'title') {
+                    match = title.includes(query);
+                } else if (mode === 'tags') {
+                    match = tags.includes(query);
+                }
+                el.classList.toggle('hidden', !match);
+            });
+        }
+
+        tabs.addEventListener('click', function(e) {
+            const btn = e.target.closest('button[data-mode]');
+            if (!btn) return;
+            mode = btn.getAttribute('data-mode');
+            setActiveTab(mode);
+            applyFilter();
+        });
+
+        searchInput.addEventListener('input', applyFilter);
+    })();
+    </script>
+</div>
+{{ end }}

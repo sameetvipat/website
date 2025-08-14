@@ -1,0 +1,32 @@
+# Hugo build output and caches
+/public/
+/resources/
+/hugo_stats.json
+.hugo_build.lock
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors/IDEs
+.vscode/
+.idea/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Node/NPM/Yarn (future-proof)
+node_modules/
+npm-debug.log*
+yarn-error.log*
+.pnpm-store/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+

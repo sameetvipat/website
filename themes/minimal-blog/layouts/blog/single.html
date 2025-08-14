@@ -1,0 +1,50 @@
+{{ define "main" }}
+<article class="space-y-8">
+    <!-- Back to all posts (right aligned) -->
+    <div class="text-right text-sm">
+        <a href="/blog/" class="nav-link">← back to all posts</a>
+    </div>
+
+    <!-- Post header -->
+    <header class="space-y-3">
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
+            {{ .Title }}
+        </h1>
+        <div class="post-meta">
+            <time class="post-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+            {{ with .Params.tags }}
+            <span>•</span>
+            <div class="post-tags">
+                {{ range . }}
+                <a class="post-tag" href="{{ (printf "/tags/%s/" (. | urlize)) | relURL }}">#{{ . }}</a>
+                {{ end }}
+            </div>
+            {{ end }}
+        </div>
+    </header>
+
+    <!-- Post content -->
+    <div class="prose prose-gray dark:prose-invert max-w-none">
+        {{ .Content }}
+    </div>
+
+    <!-- Post navigation (previous/next) -->
+    <div class="flex items-center justify-between pt-8 text-sm">
+        <div>
+            {{ with .PrevInSection }}
+            <a class="nav-link" href="{{ .RelPermalink }}">← {{ .Title }}</a>
+            {{ end }}
+        </div>
+        <div>
+            {{ with .NextInSection }}
+            <a class="nav-link" href="{{ .RelPermalink }}">{{ .Title }} →</a>
+            {{ end }}
+        </div>
+    </div>
+
+    <!-- Back to top centered below navigation -->
+    <div class="pt-4 text-center text-sm">
+        <a class="nav-link" href="#top">back to top ↑</a>
+    </div>
+</article>
+{{ end }}

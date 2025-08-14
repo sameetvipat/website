@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        mono: ['JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', 'monospace'],
+                    },
+                },
+            },
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ "css/site.css" | relURL }}">
+
+    <!-- Favicons / PWA -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon.png" | relURL }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon-32x32.png" | relURL }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ "favicon-16x16.png" | relURL }}">
+    <link rel="manifest" href="{{ "site.webmanifest" | relURL }}">
+    <link rel="mask-icon" href="{{ "safari-pinned-tab.svg" | relURL }}" color="#111827">
+    <meta name="msapplication-TileColor" content="#111827">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+    
+    <script>
+        (function() {
+            if (localStorage.getItem('theme') === 'light') {
+                document.documentElement.classList.remove('dark');
+            }
+        })();
+        function toggleDarkMode() {
+            document.body.classList.add('theme-transition');
+            const isDark = document.documentElement.classList.toggle('dark');
+            if (isDark) {
+                localStorage.removeItem('theme');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+            window.setTimeout(function() {
+                document.body.classList.remove('theme-transition');
+            }, 200);
+        }
+        function toggleMobileMenu() {
+            var el = document.getElementById('mobile-menu');
+            if (!el) return;
+            el.classList.toggle('hidden');
+        }
+    </script>
+</head>
+<body class="min-h-screen bg-white text-gray-800 dark:bg-black dark:text-gray-100 transition-colors duration-200">
+         <!-- Navigation -->
+    <nav class="transition-colors duration-200 mb-6">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 pt-4">
+                <div class="text-2xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+                    Sameet Vipat
+                </div>
+                <button class="sm:hidden p-2 rounded-md border border-gray-300 dark:border-gray-700" aria-controls="mobile-menu" aria-expanded="false" onclick="toggleMobileMenu()">
+                    <span class="sr-only">Toggle navigation</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-900 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <div class="hidden sm:flex items-center space-x-4 sm:space-x-8 sm:mr-8">
+                    <a href="{{ "/" | relURL }}" class="nav-link font-medium">home</a>
+                    <a href="{{ "/blog/" | relURL }}" class="nav-link font-medium">blog</a>
+                    <a href="{{ "/projects.html" | relURL }}" class="nav-link font-medium">projects</a>
+                    <a href="{{ "/resume.pdf" | relURL }}" class="nav-link font-medium" target="_blank">resume</a>
+                    <button onclick="toggleDarkMode()" class="dark-mode-toggle" aria-label="Toggle dark mode"></button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="sm:hidden hidden mt-2">
+                <div class="flex flex-col gap-2">
+                    <a href="{{ "/" | relURL }}" class="nav-link font-medium">home</a>
+                    <a href="{{ "/blog/" | relURL }}" class="nav-link font-medium">blog</a>
+                    <a href="{{ "/projects.html" | relURL }}" class="nav-link font-medium">projects</a>
+                    <a href="{{ "/resume.pdf" | relURL }}" class="nav-link font-medium" target="_blank">resume</a>
+                    <div class="pt-2">
+                        <button onclick="toggleDarkMode()" class="dark-mode-toggle" aria-label="Toggle dark mode"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {{ block "main" . }}{{ end }}
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-16 text-xs transition-colors duration-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="text-center text-gray-500 dark:text-gray-400">
+                <p>&copy; {{ now.Year }} Sameet Vipat</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,110 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+/* Base styles */
+html {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
+}
+
+body {
+  background-color: white;
+  color: #374151;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.dark body {
+  background-color: #111827;
+  color: #e5e7eb;
+}
+
+/* Navigation */
+.nav-link {
+  color: #374151;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: #111827;
+}
+
+.dark .nav-link {
+  color: #d1d5db;
+}
+
+.dark .nav-link:hover {
+  color: white;
+}
+
+/* Dark mode toggle */
+.dark-mode-toggle {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: black;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.dark .dark-mode-toggle {
+  background-color: white;
+}
+
+/* Blog styles */
+.blog-heading {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+  text-decoration: underline;
+  text-decoration-color: #9ca3af;
+  text-underline-offset: 0.25rem;
+}
+
+.dark .blog-heading {
+  color: white;
+  text-decoration-color: #6b7280;
+}
+
+.post-link {
+  display: block;
+  padding: 0.5rem 0;
+  transition: background-color 0.2s;
+}
+
+.post-link:hover {
+  background-color: #f9fafb;
+}
+
+.dark .post-link:hover {
+  background-color: #1f2937;
+}
+
+.post-date {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.dark .post-date {
+  color: #9ca3af;
+}
+
+.post-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #111827;
+  transition: color 0.2s;
+}
+
+.post-title:hover {
+  color: #374151;
+}
+
+.dark .post-title {
+  color: white;
+}
+
+.dark .post-title:hover {
+  color: #d1d5db;
+}
